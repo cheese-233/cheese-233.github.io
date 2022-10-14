@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="./video-js.css" rel="stylesheet">
+    <script src="./video.js"></script>
+    <script src="./videojs-contrib-hls.js"></script>
+</head>
+
+<body>
+    <style>
+        .video-js .vjs-tech {
+            position: relative !important;
+        }
+    </style>
+    <div>
+        <video id="myVideo" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto"
+            data-setup='{}' style='width: 100%;height: 100%'>
+            <source id="source" src="video.m3u8" type="application/x-mpegURL">
+            </source>
+        </video>
+    </div>
+</body>
+
+<script>
+    var myVideo = videojs('myVideo', {
+        bigPlayButton: true,
+        textTrackDisplay: false,
+        posterImage: false,
+        errorDisplay: false,
+    })
+    myVideo.play()
+    var changeVideo = function (vdoSrc) {
+        if (/\.m3u8$/.test(vdoSrc)) {
+            myVideo.src({
+                src: vdoSrc,
+                type: 'application/x-mpegURL'
+            })
+        } else {
+            myVideo.src(vdoSrc)
+        }
+        myVideo.load();
+        myVideo.play();
+    }
+</script>
